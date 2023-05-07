@@ -67,22 +67,6 @@ Things you may want to cover:
  belongs_to :prefecture
  belongs_to :time_to_ship
 
-##  shipping_addressesテーブル
-
-| Column         | Type       | Options                       |
-| -------------- | ---------- | ----------------------------- |
-| postcode       | string     | null: false                   |
-| prefecture_id  | string     | null: false, foreign_key:true |
-| municipalities | string     | null: false                   |
-| address        | string     | null: false                   |
-| building_name  | string     |                               |
-| phone_num      | string     | null: false                   |
-| purchase       | references | null: false, foreign_key:true |
-
-### Association
- belongs_to :purchase
- belongs_to :prefecture
-
 ##  purchasesテーブル
 
 | Column           | Type       | Options                      |
@@ -93,4 +77,20 @@ Things you may want to cover:
 ### Association
  belongs_to :user
  belongs_to :item
- belongs_to :shipping_address
+ has_one :shipping_address
+
+ ##  shipping_addressesテーブル
+
+| Column         | Type       | Options                       |
+| -------------- | ---------- | ----------------------------- |
+| postcode       | string     | null: false                   |
+| prefecture_id  | integer    | null: false                   |
+| municipalities | string     | null: false                   |
+| address        | string     | null: false                   |
+| building_name  | string     |                               |
+| phone_num      | string     | null: false                   |
+| purchase       | references | null: false, foreign_key:true |
+
+### Association
+ belongs_to :purchase
+ belongs_to :prefecture
