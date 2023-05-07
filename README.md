@@ -27,19 +27,17 @@ Things you may want to cover:
 
 ##  usersテーブル
 
-| Column                | Type   | Options                   |
-| --------------------- | ------ | ------------------------- |
-| nickname              | string | null: false               |
-| email                 | string | null: false, unique: true |
-| password              | string | null: false               |
-| password_confirmation | string | null: false               |
-| last_name             | string | null: false               |
-| first_name            | string | null: false               |
-| last_name_kana        | string | null: false               |
-| first_name_kana       | string | null: false               |
-| birth_year            | string | null: false               |
-| birth_month           | string | null: false               |
-| birth_day             | string | null: false               |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| last_name          | string | null: false               |
+| first_name         | string | null: false               |
+| last_name_kana     | string | null: false               |
+| first_name_kana    | string | null: false               |
+| birthday           | date   | null: false               |
+
 
 ### Association
  has_many :items
@@ -47,47 +45,50 @@ Things you may want to cover:
 
 ##  itemsテーブル
 
-| Column          | Type       | Options          |
-| --------------- | ---------- | ---------------- |
-| item_name       | string     | null: false      |
-| explanation     | text       | null: false      |
-| category        | string     | null: false      |
-| condition       | string     | null: false      |
-| postage         | string     | null: false      |
-| shipping_region | string     | null: false      |
-| time_to_ship    | string     | null: false      |
-| prise           | string     | null: false      |
-| user_id         | references | foreign_key:true |
+| Column          | Type       | Options                       |
+| --------------- | ---------- | ----------------------------- |
+| item_name       | string     | null: false                   |
+| explanation     | text       | null: false                   |
+| category_id     | integer    | null: false, foreign_key:true |
+| condition_id    | integer    | null: false, foreign_key:true |
+| postage_id      | integer    | null: false, foreign_key:true |
+| prefecture_id  | integer    | null: false, foreign_key:true |
+| time_to_ship_id | integer    | null: false, foreign_key:true |
+| price           | integer    | null: false                   |
+| user            | references | null: false, foreign_key:true |
 
 ### Association
  belongs_to :user
- has_one :purchases
+ has_one :purchase
  has_one_attached :image
+ belongs_to :category
+ belongs_to :condition
+ belongs_to :postage
+ belongs_to :prefecture
+ belongs_to :time_to_ship
 
+##  shipping_addressesテーブル
 
-##  shipping_addressテーブル
-
-| Column         | Type   | Options     |
-| -------------- | ------ | ----------- |
-| postcode       | string | null: false |
-| prefectures    | string | null: false |
-| municipalities | string | null: false |
-| address        | string | null: false |
-| building_name  | string |             |
-| phone_num      | string | null: false |
+| Column         | Type   | Options                       |
+| -------------- | ------ | ----------------------------- |
+| postcode       | string | null: false                   |
+| prefecture_id  | string | null: false, foreign_key:true |
+| municipalities | string | null: false                   |
+| address        | string | null: false                   |
+| building_name  | string |                               |
+| phone_num      | string | null: false                   |
 
 ### Association
  belongs_to :purchase
+ belongs_to :genre
 
 ##  purchasesテーブル
 
-| Column              | Type       | Options          |
-| ------------------- | ---------- | ---------------- |
-| item_id             | references | foreign_key:true |
-| user_id             | references | foreign_key:true |
-| shipping_address_id | references | foreign_key:true |
+| Column           | Type       | Options                      |
+| ---------------- | ---------- | ---------------------------- |
+| item             | references | null:false, foreign_key:true |
+| user             | references | null:false, foreign_key:true |
 
 ### Association
  belongs_to :user
  belongs_to :item
- belongs_to :purchase
