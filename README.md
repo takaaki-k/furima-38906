@@ -49,11 +49,11 @@ Things you may want to cover:
 | --------------- | ---------- | ----------------------------- |
 | item_name       | string     | null: false                   |
 | explanation     | text       | null: false                   |
-| category_id     | integer    | null: false, foreign_key:true |
-| condition_id    | integer    | null: false, foreign_key:true |
-| postage_id      | integer    | null: false, foreign_key:true |
-| prefecture_id  | integer    | null: false, foreign_key:true |
-| time_to_ship_id | integer    | null: false, foreign_key:true |
+| category_id     | integer    | null: false,                  |
+| condition_id    | integer    | null: false,                  |
+| postage_id      | integer    | null: false,                  |
+| prefecture_id   | integer    | null: false,                  |
+| time_to_ship_id | integer    | null: false,                  |
 | price           | integer    | null: false                   |
 | user            | references | null: false, foreign_key:true |
 
@@ -69,18 +69,19 @@ Things you may want to cover:
 
 ##  shipping_addressesテーブル
 
-| Column         | Type   | Options                       |
-| -------------- | ------ | ----------------------------- |
-| postcode       | string | null: false                   |
-| prefecture_id  | string | null: false, foreign_key:true |
-| municipalities | string | null: false                   |
-| address        | string | null: false                   |
-| building_name  | string |                               |
-| phone_num      | string | null: false                   |
+| Column         | Type       | Options                       |
+| -------------- | ---------- | ----------------------------- |
+| postcode       | string     | null: false                   |
+| prefecture_id  | string     | null: false, foreign_key:true |
+| municipalities | string     | null: false                   |
+| address        | string     | null: false                   |
+| building_name  | string     |                               |
+| phone_num      | string     | null: false                   |
+| purchase       | references | null: false, foreign_key:true |
 
 ### Association
  belongs_to :purchase
- belongs_to :genre
+ belongs_to :prefecture
 
 ##  purchasesテーブル
 
@@ -92,3 +93,4 @@ Things you may want to cover:
 ### Association
  belongs_to :user
  belongs_to :item
+ belongs_to :shipping_address
