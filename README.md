@@ -93,4 +93,4 @@ Things you may want to cover:
 
 ### Association
  belongs_to :purchase
- belongs_to :prefecture
+ belongs_to :prefecture_id
