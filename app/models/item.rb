@@ -13,25 +13,22 @@ class Item < ApplicationRecord
   belongs_to :time_to_ship
 
   #validation
-  validates :item_name,
-    presence: true
-  validates :image,
-    presence: true
-  validates :explanation,
-    presence: true
-  validates :category_id,
-    numericality: { other_than: 1 , message: "can't be blank"}
-  validates :condition_id,
-    numericality: { other_than: 1 , message: "can't be blank"}
-  validates :postage_id,
-    numericality: { other_than: 1 , message: "can't be blank"}
-  validates :prefecture_id,
-    numericality: { other_than: 1 , message: "can't be blank"}
-  validates :time_to_ship_id,
-    numericality: { other_than: 1 , message: "can't be blank"}
+  with_options presence: true do
+    validates :item_name
+    validates :image
+    validates :explanation
+  end
+
+  with_options presence: true, numericality: { other_than: 1, message: "can't be blank"} do
+    validates :category_id
+    validates :condition_id
+    validates :postage_id
+    validates :prefecture_id
+    validates :time_to_ship_id
+  end
+
   validates :price,
     presence: true,
-    numericality: { greater_than_or_equal: 300, less_than_or_equal: 9999999, message: "is out of setting range" },
-    format: { with: /\A\d{3,7}\z/, message: "is invalid. Input half-width characters" }
-
+    numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 ,message: "is out of setting range" }
+    #numericality: { with: /\A[0-9]+\z/, message: "is invalid. Input half-width characters" }
 end
