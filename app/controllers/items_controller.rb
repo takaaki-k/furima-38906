@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
 
   def index
-    
+
   end
 
   def new
@@ -20,12 +20,6 @@ class ItemsController < ApplicationController
   end
 
   private
-
-  def authenticate_user
-    unless user_signed_in?
-      redirect_to new_user_session_path
-    end
-  end
 
   def item_params
     params.require(:item).permit(:item_name, :explanation, :image, :category_id, :condition_id, :postage_id, :prefecture_id, :time_to_ship_id, :price).merge(user_id: current_user.id)
