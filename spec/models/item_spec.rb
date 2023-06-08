@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
-    user = FactoryBot.create(:user)
-    @item = FactoryBot.build(:item, user: user)
-    @item.image = fixture_file_upload('app/assets/images/star.png')
+    #user = FactoryBot.create(:user)
+    @item = FactoryBot.build(:item)
+    #@item.image = fixture_file_upload('app/assets/images/star.png')
   end
   
   describe '商品出品' do

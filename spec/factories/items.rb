@@ -8,5 +8,11 @@ FactoryBot.define do
     prefecture_id       { Faker::Number.within(range: 2..48) }
     time_to_ship_id     { Faker::Number.within(range: 2..4) }
     price               { Faker::Number.within(range: 300..9999999) }
+  
+    association :user
+
+    after(:build) do |item|
+      item.image.attach(io: File.open('app/assets/images/star.png'), filename: 'star.png')
+    end
   end
 end
