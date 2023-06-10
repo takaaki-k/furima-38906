@@ -130,7 +130,7 @@
 
       <% @items.each do |item| %>
         <li class='list'>
-          <%= link_to '#' do %>
+          <%= link_to item_path(item), method: :get do %>
             <%= image_tag item.image, class: "item-img" %>
             <%# ②「sold out」表示 %>
             <div class='item-info'>
