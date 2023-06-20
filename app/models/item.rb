@@ -10,6 +10,7 @@ class Item < ApplicationRecord
   belongs_to :postage
   belongs_to :prefecture
   belongs_to :time_to_ship
+  has_one :purchase
 
   #validation
   with_options presence: true do
