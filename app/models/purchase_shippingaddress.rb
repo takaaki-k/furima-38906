@@ -1,6 +1,6 @@
 class PurchaseShippingaddress
   include ActiveModel::Model
-  attr_accessor :item_id, :user_id, :purchase_id, :postcode, :prefecture_id, :city, :prefecure, :municipalities, :address, :building_name, :phone_num
+  attr_accessor :item_id, :user_id, :postcode, :prefecture_id, :city, :prefecure, :municipalities, :address, :building_name, :phone_num, :token
 
   with_options presence: true do
     validates :item_id
@@ -10,11 +10,11 @@ class PurchaseShippingaddress
     validates :municipalities
     validates :address
     validates :phone_num, format: {with: /\A\d{10,11}\z/, message: "is invalid. Input only number"}
+    validates :token
   end
 
   def save
     purchase = Purchase.create(item_id: item_id, user_id: user_id)
     ShippingAddress.create(purchase_id: purchase.id, postcode: postcode, prefecture_id: prefecture_id, municipalities: municipalities, address: address, building_name: building_name, phone_num: phone_num)
-
   end
 end
