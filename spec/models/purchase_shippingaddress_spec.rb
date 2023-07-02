@@ -19,6 +19,16 @@ RSpec.describe PurchaseShippingaddress, type: :model do
     end
 
     context '購入できないとき' do
+      it 'userがなければ購入できない' do
+        @purchase_shippingaddress.user_id = nil
+        @purchase_shippingaddress.valid?
+        expect(@purchase_shippingaddress.errors.full_messages).to include("User can't be blank")
+      end
+      it 'itemがなければ購入できない' do
+        @purchase_shippingaddress.item_id = nil
+        @purchase_shippingaddress.valid?
+        expect(@purchase_shippingaddress.errors.full_messages).to include("Item can't be blank")
+      end
       it 'postcodeが空では保存できない' do
         @purchase_shippingaddress.postcode = ''
         @purchase_shippingaddress.valid?

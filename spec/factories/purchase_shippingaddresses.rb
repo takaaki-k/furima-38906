@@ -1,7 +1,5 @@
 FactoryBot.define do
   factory :purchase_shippingaddress do
-    user_id               { Faker::Number.non_zero_digit }
-    item_id               { Faker::Number.non_zero_digit }
     postcode              { (Faker::Number.number(digits: 3)).to_s + '-' + (Faker::Number.number(digits: 4)).to_s }
     prefecture_id         { Faker::Number.within(range: 2..48) }
     municipalities        { Faker::Address.city }
