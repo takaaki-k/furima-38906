@@ -23,6 +23,13 @@ class ItemsController < ApplicationController
   def show
   end
 
+  def edit
+    if @item.user.id == current_user.id && @item.purchase.nil?
+    else
+      redirect_to root_path
+    end
+  end
+
   def update
     if @item.update(item_params)
       redirect_to item_path(@item.id)
